@@ -56,32 +56,7 @@ namespace SynopsisThatWontContainDogsForSure
         {
 
         }
-        [EntryPoint]
-        public static void Run(float[,] result)
-        {
-            int size = result.GetLength(0);
-            Parallel.For(0, size, 0, size, (i, j) => {
-                float x = fromX + i * h;
-                float y = fromY + j * h;
-                result[i, j] = IterCount(x, y);
-            });
-        }
 
-        public static float IterCount(float cx, float cy)
-        {
-            float result = 0.0F;
-            float x = 0.0f, y = 0.0f, xx = 0.0f, yy = 0.0f;
-            while (xx + yy <= 4.0f && result < maxiter)
-            {
-                xx = x * x;
-                yy = y * y;
-                float xtmp = xx - yy + cx;
-                y = 2.0f * x * y + cy;
-                x = xtmp;
-                result++;
-            }
-            return result;
-        }
         private float Q_rsqrt(float number)
         {
             long i;

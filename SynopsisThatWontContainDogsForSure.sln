@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynopsisThatWontContainDogsForSure", "SynopsisThatWontContainDogsForSure\SynopsisThatWontContainDogsForSure.csproj", "{CEADD93F-70A3-4878-BBDA-7E0E953A3C98}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPUMagic", "GPUMagic\GPUMagic\GPUMagic.csproj", "{9EAD1664-108E-4FC1-AADC-4CE03EB3BDD1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GPUMagic_CUDA", "GPUMagic\GPUMagic_CUDA\GPUMagic_CUDA.vcxproj", "{AB78E5D2-350B-4EDF-84F1-1BD09CA5370B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -41,6 +45,28 @@ Global
 		{CEADD93F-70A3-4878-BBDA-7E0E953A3C98}.Release|x86.ActiveCfg = Release|x86
 		{CEADD93F-70A3-4878-BBDA-7E0E953A3C98}.Release|x86.Build.0 = Release|x86
 		{CEADD93F-70A3-4878-BBDA-7E0E953A3C98}.Release|x86.Deploy.0 = Release|x86
+		{9EAD1664-108E-4FC1-AADC-4CE03EB3BDD1}.Debug|ARM.ActiveCfg = Debug|x64
+		{9EAD1664-108E-4FC1-AADC-4CE03EB3BDD1}.Debug|ARM64.ActiveCfg = Debug|x64
+		{9EAD1664-108E-4FC1-AADC-4CE03EB3BDD1}.Debug|x64.ActiveCfg = Debug|x64
+		{9EAD1664-108E-4FC1-AADC-4CE03EB3BDD1}.Debug|x64.Build.0 = Debug|x64
+		{9EAD1664-108E-4FC1-AADC-4CE03EB3BDD1}.Debug|x86.ActiveCfg = Debug|x64
+		{9EAD1664-108E-4FC1-AADC-4CE03EB3BDD1}.Debug|x86.Build.0 = Debug|x64
+		{9EAD1664-108E-4FC1-AADC-4CE03EB3BDD1}.Release|ARM.ActiveCfg = Release|x64
+		{9EAD1664-108E-4FC1-AADC-4CE03EB3BDD1}.Release|ARM64.ActiveCfg = Release|x64
+		{9EAD1664-108E-4FC1-AADC-4CE03EB3BDD1}.Release|x64.ActiveCfg = Release|x64
+		{9EAD1664-108E-4FC1-AADC-4CE03EB3BDD1}.Release|x64.Build.0 = Release|x64
+		{9EAD1664-108E-4FC1-AADC-4CE03EB3BDD1}.Release|x86.ActiveCfg = Release|x64
+		{AB78E5D2-350B-4EDF-84F1-1BD09CA5370B}.Debug|ARM.ActiveCfg = Debug|x64
+		{AB78E5D2-350B-4EDF-84F1-1BD09CA5370B}.Debug|ARM64.ActiveCfg = Debug|x64
+		{AB78E5D2-350B-4EDF-84F1-1BD09CA5370B}.Debug|x64.ActiveCfg = Debug|x64
+		{AB78E5D2-350B-4EDF-84F1-1BD09CA5370B}.Debug|x64.Build.0 = Debug|x64
+		{AB78E5D2-350B-4EDF-84F1-1BD09CA5370B}.Debug|x86.ActiveCfg = Debug|x64
+		{AB78E5D2-350B-4EDF-84F1-1BD09CA5370B}.Debug|x86.Build.0 = Debug|x64
+		{AB78E5D2-350B-4EDF-84F1-1BD09CA5370B}.Release|ARM.ActiveCfg = Release|x64
+		{AB78E5D2-350B-4EDF-84F1-1BD09CA5370B}.Release|ARM64.ActiveCfg = Release|x64
+		{AB78E5D2-350B-4EDF-84F1-1BD09CA5370B}.Release|x64.ActiveCfg = Release|x64
+		{AB78E5D2-350B-4EDF-84F1-1BD09CA5370B}.Release|x64.Build.0 = Release|x64
+		{AB78E5D2-350B-4EDF-84F1-1BD09CA5370B}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

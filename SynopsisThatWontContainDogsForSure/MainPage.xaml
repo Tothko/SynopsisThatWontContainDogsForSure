@@ -10,7 +10,7 @@
     Loaded="Page_Loaded" Unloaded="Page_Unloaded">
 
     <Grid>
-        <MediaPlayerElement x:Name="MediaPlayerElement" AutoPlay="True" AreTransportControlsEnabled="False" Stretch="Fill" HorizontalAlignment="Left" Grid.Row="0" VerticalAlignment="Top" Width="640" Height="360" Margin="5,5,0,0"/>
+        <MediaPlayerElement x:Name="MediaPlayerElement" AutoPlay="True" AreTransportControlsEnabled="False" Stretch="Fill" HorizontalAlignment="Left" Grid.Row="0" VerticalAlignment="Top" Margin="5,5,0,0"/>
         <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="ms-appx:///Assets/NotADog.jpg" Stretch="Uniform" Margin="90,365,0,0"  />
     </Grid>
 </Page>
