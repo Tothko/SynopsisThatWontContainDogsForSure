@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{ab78e5d2-350b-4edf-84f1-1bd09ca5370b}</ProjectGuid>
-    <RootNamespace>GPUMagic_CUDA</RootNamespace>
-    <ProjectName>GPUMagic_CUDA</ProjectName>
+    <ProjectGuid>{762f6d2e-df98-4f04-bd84-417ac96acf81}</ProjectGuid>
+    <RootNamespace>TryNumber2000_CUDA</RootNamespace>
+    <ProjectName>TryNumber2000_CUDA</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(VisualStudioVersion)' == '16.0'">
@@ -65,7 +65,7 @@
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup>
-    <DotNetProjectName>$([System.String]::Copy(&quot;GPUMagic_CUDA&quot;).Replace(&quot;_CUDA&quot;,&quot;&quot;))</DotNetProjectName>
+    <DotNetProjectName>$([System.String]::Copy(&quot;TryNumber2000_CUDA&quot;).Replace(&quot;_CUDA&quot;,&quot;&quot;))</DotNetProjectName>
   </PropertyGroup>
   <PropertyGroup Label="HybridizerConfig" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <HybridizerFlavors>CUDA</HybridizerFlavors>

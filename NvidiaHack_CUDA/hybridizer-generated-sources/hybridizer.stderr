@@ -1,0 +1,2 @@
+hybridizer.includes.cuda.h(129): error: namespace "hybridizer" has no member class "baseexception"
+hybridizer.includes.cuda.h(129): error: not a class or struct name

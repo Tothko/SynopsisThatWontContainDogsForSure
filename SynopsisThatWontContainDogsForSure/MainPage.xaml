@@ -7,10 +7,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    Loaded="Page_Loaded" Unloaded="Page_Unloaded">
+    Loaded="Page_Loaded" Unloaded="Page_Unloaded" Width="480" Height="720" CanDrag="False" MaxHeight="720" MaxWidth="480" MinHeight="720" MinWidth="480">
 
-    <Grid>
+    <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+        <TextBlock Text="I lied HAHA!" Style="{StaticResource HeaderTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0"/>
         <MediaPlayerElement x:Name="MediaPlayerElement" AutoPlay="True" AreTransportControlsEnabled="False" Stretch="Fill" HorizontalAlignment="Left" Grid.Row="0" VerticalAlignment="Top" Margin="5,5,0,0"/>
-        <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="ms-appx:///Assets/NotADog.jpg" Stretch="Uniform" Margin="90,365,0,0"  />
+        <TextBox BeforeTextChanging="TextBox_OnBeforeTextChanging" x:Name="InputBox" Text="{x:Bind Input, UpdateSourceTrigger=LostFocus, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource AutoSuggestBoxTextBoxStyle}" Width="256" Margin="0,0,0,0"></TextBox>
+        <Button Name="ExecuteBtn1" Content="New Game" Margin="0,100,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Click="ExecuteBtn1_Click"/>
+        <Button Name="ExecuteBtn2" Content="Load Game" Margin="0,140,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Click="ExecuteBtn2_Click"/>
+        <Button Name="ExecuteBtn3" Content="Settings" Margin="0,180,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Click="ExecuteBtn3_Click"/>
+        <Button Name="ExecuteBtn4" Content="Credits" Margin="0,220,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Click="ExecuteBtn4_Click"/>
+        <Button Name="ExecuteBtn5" Content="Exit" Margin="0,260,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Click="ExecuteBtn5_Click"/>
+        <ScrollViewer VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="300" Margin="5,0,5,5">
+            <ListView Name="OutPutListBox"  ItemsSource="{x:Bind OutPutList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  Background="{StaticResource SystemBaseLowColor}"></ListView>
+        </ScrollViewer>
     </Grid>
 </Page>

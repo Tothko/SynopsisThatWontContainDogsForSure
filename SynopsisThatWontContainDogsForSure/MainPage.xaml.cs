@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Media.Core;
 using Windows.Media.Playback;
+using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -23,13 +27,48 @@ namespace SynopsisThatWontContainDogsForSure
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    /// 
+    public sealed partial class MainPage : Page, INotifyPropertyChanged
     {
         MediaPlayer mediaPlayer;
+        private string _input;
 
+        public string Input
+        {
+            get { return _input; }
+            set { _input = value;
+                OnPropertyChanged("Input");
+            }
+        }
+
+
+        private List<float> _outPutList;
+
+        public List<float> OutPutList
+        {
+            get { return _outPutList; }
+            set { _outPutList = value;
+            }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected async void OnPropertyChanged([CallerMemberName] string propName = "")
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.High,
+          () =>
+          {
+              PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
+          });
+        }
         public MainPage()
         {
             this.InitializeComponent();
+            ApplicationView.PreferredLaunchViewSize = new Size(480, 800);
+            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.CompactOverlay;
+            OutPutList = new List<float>();
+
+
+
             
         }
 
@@ -73,5 +112,61 @@ namespace SynopsisThatWontContainDogsForSure
 
             return y;
         }
-    }
+        private void TextBox_OnBeforeTextChanging(TextBox sender,
+                                          TextBoxBeforeTextChangingEventArgs args)
+        {
+            args.Cancel = args.NewText.Any(c => !char.IsDigit(c));
+        }
+        private void ExecuteBtn1_Click(object sender, RoutedEventArgs e)
+        {
+            OutPutList = new List<float>();
+            for (int i = 0; i < Int32.Parse(Input); i++)
+            {
+                OutPutList.Add(Q_rsqrt(i));
+            }
+            OutPutListBox.ItemsSource = OutPutList;
+        }
+
+        private void ExecuteBtn2_Click(object sender, RoutedEventArgs e)
+        {
+            OutPutList = new List<float>();
+            Parallel.For(0, Int32.Parse(Input), i => { OutPutList.Add(Q_rsqrt(i)); });
+            OutPutListBox.ItemsSource = OutPutList;
+
+        }
+
+        private async void ExecuteBtn3_Click(object sender, RoutedEventArgs e)
+        {
+            OutPutList = new List<float>();
+
+            OutPutList = Task.Factory.StartNew(() => ThirdMethod()).Result;
+            await Task.CompletedTask;
+            OutPutListBox.ItemsSource = OutPutList;
+
+
+        }
+
+        private async void ExecuteBtn4_Click(object sender, RoutedEventArgs e)
+        {
+            OutPutList = new List<float>();
+            Parallel.For(0, Int32.Parse(Input), i => { OutPutList.Add(Q_rsqrt(i)); });
+            OutPutListBox.ItemsSource = OutPutList;
+        }
+
+        private void ExecuteBtn5_Click(object sender, RoutedEventArgs e)
+        {
+           // Magic program = new Magic();
+        }
+        private List<float> ThirdMethod()
+        {
+            List<float> localOutPutList = new List<float>();
+
+            for (int i = 0; i < Int32.Parse(Input); i++)
+            {
+                localOutPutList.Add(Q_rsqrt(i));
+            } 
+
+            return localOutPutList;
+        }
+    } 
 }
