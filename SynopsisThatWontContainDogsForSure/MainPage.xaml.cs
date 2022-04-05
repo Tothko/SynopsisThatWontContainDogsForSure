@@ -139,6 +139,7 @@ namespace SynopsisThatWontContainDogsForSure
         {
             List<OutputModel> outputModels = new List<OutputModel>();
             var startTime = DateTime.Now;
+            StartTimeTextBox.Text = startTime.ToLongTimeString();
             for (int i = 0; i < numberOfItterations; i++)
             {
                 OutputModel outputModel = new OutputModel
@@ -151,13 +152,17 @@ namespace SynopsisThatWontContainDogsForSure
                 };
                 outputModels.Add(outputModel);
             }
-            var endTime = startTime - DateTime.Now;
+            TimeSpan endTime = startTime - DateTime.Now;
+            EndTimeTextBox.Text = endTime.ToString();
+
             OutputList.ItemsSource = outputModels;
         }
         private void ParallelFor(int numberOfTasks)
         {
             ConcurrentBag<OutputModel> outputModels = new ConcurrentBag<OutputModel>();
             var startTime = DateTime.Now;
+            StartTimeTextBox.Text = startTime.ToLongTimeString();
+
             Parallel.For(0, numberOfTasks, (i, state) =>
               {
                   OutputModel outputModel = new OutputModel
@@ -171,13 +176,17 @@ namespace SynopsisThatWontContainDogsForSure
                   outputModels.Add(outputModel);
               });
             var endTime = startTime - DateTime.Now;
+            EndTimeTextBox.Text = endTime.ToString();
+
             OutputList.ItemsSource = outputModels;
         }
-        private void ParralelForPartitioned(int numberOrTasks)
+        private void ParralelForPartitioned(int iterations)
         {
             ConcurrentBag<OutputModel> outputModels = new ConcurrentBag<OutputModel>();
             var startTime = DateTime.Now;
-            Parallel.ForEach(Partitioner.Create(0, numberOrTasks), (range)  =>
+            StartTimeTextBox.Text = startTime.ToLongTimeString();
+
+            Parallel.ForEach(Partitioner.Create(0, iterations), (range)  =>
             {
             for(int i = range.Item1; i < range.Item2; i++)
 {
@@ -193,6 +202,8 @@ namespace SynopsisThatWontContainDogsForSure
                 }
             });
             var endTime = startTime - DateTime.Now;
+            EndTimeTextBox.Text = endTime.ToString();
+
             OutputList.ItemsSource = outputModels;
         }
 
@@ -216,11 +227,12 @@ namespace SynopsisThatWontContainDogsForSure
                 }
             });
         }
-        private void OperationBtn_Click(object sender, RoutedEventArgs e)
+        private async void OperationBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (FirstTabBtn.IsChecked == true) SequentialFor(100000);
-            if (SecondTabBtn.IsChecked == true) ParallelFor(100000);
-            if (ThirdTabBtn.IsChecked == true) ParralelForPartitioned(100000);
+            int entryNumber = 10000000;
+            if (FirstTabBtn.IsChecked == true) SequentialFor(entryNumber);
+            if (SecondTabBtn.IsChecked == true) ParallelFor(entryNumber);
+            if (ThirdTabBtn.IsChecked == true) ParralelForPartitioned(entryNumber);
             
         }
     }

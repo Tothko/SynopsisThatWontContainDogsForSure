@@ -36,6 +36,14 @@
                         <TextBlock Text="The FORK operation" Style="{StaticResource NavigationViewItemHeaderTextStyle}" Margin="5,0,0,0"></TextBlock>
                     </StackPanel>
                 </RadioButton>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="StartingTime: "/>
+                    <TextBlock Name="StartTimeTextBox"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="EndTime: "/>
+                    <TextBlock Name="EndTimeTextBox"/>
+                </StackPanel>
             </StackPanel>
         </Grid>
         <Grid Name="MainGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="300,0,0,0">
