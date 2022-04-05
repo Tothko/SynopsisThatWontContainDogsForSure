@@ -10,7 +10,44 @@
     Loaded="Page_Loaded" Unloaded="Page_Unloaded">
 
     <Grid>
-        <MediaPlayerElement x:Name="MediaPlayerElement" AutoPlay="True" AreTransportControlsEnabled="False" Stretch="Fill" HorizontalAlignment="Left" Grid.Row="0" VerticalAlignment="Top" Margin="5,5,0,0"/>
-        <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="ms-appx:///Assets/NotADog.jpg" Stretch="Uniform" Margin="90,365,0,0"  />
+        <Grid Name="LeftMenu" HorizontalAlignment="Left" Background="{StaticResource ApplicationPageBackgroundThemeBrush}" VerticalAlignment="Stretch" Width="300">
+            <StackPanel Orientation="Vertical">
+                <RadioButton Name="FirstTabBtn" GroupName="Taby" Style="{StaticResource PivotTitleContentControlStyle}" Checked="FirstTabBtn_Checked">
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon Symbol="NewFolder" />
+                        <TextBlock Text="The first operation" Style="{StaticResource NavigationViewItemHeaderTextStyle}" Margin="5,0,0,0"></TextBlock>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton Name="SecondTabBtn" GroupName="Taby" Style="{StaticResource PivotTitleContentControlStyle}" Checked="SecondTabBtn_Checked">
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon Symbol="NewFolder" />
+                        <TextBlock Text="The second operation" Style="{StaticResource NavigationViewItemHeaderTextStyle}" Margin="5,0,0,0"></TextBlock>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton Name="ThirdTabBtn" GroupName="Taby" Style="{StaticResource PivotTitleContentControlStyle}" Checked="ThirdTabBtn_Checked">
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon Symbol="NewFolder" />
+                        <TextBlock Text="The third operation" Style="{StaticResource NavigationViewItemHeaderTextStyle}" Margin="5,0,0,0"></TextBlock>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton Name="FourthTabBtn" GroupName="Taby" Style="{StaticResource PivotTitleContentControlStyle}" Checked="FourthTabBtn_Checked">
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon Symbol="NewFolder" />
+                        <TextBlock Text="The FORK operation" Style="{StaticResource NavigationViewItemHeaderTextStyle}" Margin="5,0,0,0"></TextBlock>
+                    </StackPanel>
+                </RadioButton>
+            </StackPanel>
+        </Grid>
+        <Grid Name="MainGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="300,0,0,0">
+            <TextBlock Name="HeaderTextBlock" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,10,0,0"></TextBlock>
+            <TextBlock Name="DescriptionTextBlock" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,100,0,500"/>
+            <Button Name="OperationBtn" HorizontalAlignment="Center" Margin="0,-75,0,0" Click="OperationBtn_Click" Canvas.ZIndex="10">
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Symbol="Flag" />
+                    <TextBlock Text="Click me" Margin="5,0,0,0"></TextBlock>
+                </StackPanel>
+            </Button>
+            <ListBox Name="OutputList" VerticalAlignment="Bottom" Height="500" Margin="10,10,10,0"></ListBox>
+        </Grid>
     </Grid>
 </Page>
