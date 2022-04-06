@@ -32,7 +32,7 @@ namespace SynopsisThatWontContainDogsForSure
         public MainPage()
         {
             this.InitializeComponent();
-            
+
         }
 
 
@@ -49,18 +49,18 @@ namespace SynopsisThatWontContainDogsForSure
 
         private float Q_rsqrt(float number)
         {
-            long i;
-            float x2, y;
-            const float threehalfs = 1.5F;
+               long i;
+               float x2, y;
+               const float threehalfs = 1.5F;
 
-            x2 = number * 0.5F;
-            y = number;
-            i = BitConverter.SingleToInt32Bits(y);      // evil floating point bit level hacking
-            i = 0x5f3759df - (i >> 1);                  // what the fuck? 
-            y = BitConverter.SingleToInt32Bits(i);
-            y = y * (threehalfs - (x2 * y * y));        // 1st iteration
-        //	y  = y * ( threehalfs - ( x2 * y * y ) );   // 2nd iteration, this can be removed
-
+               x2 = number * 0.5F;
+               y = number;
+               i = BitConverter.SingleToInt32Bits(y);      // evil floating point bit level hacking
+               i = 0x5f3759df - (i >> 1);                  // what the fuck? 
+               y = BitConverter.SingleToInt32Bits(i);
+               y = y * (threehalfs - (x2 * y * y));        // 1st iteration
+           //	y  = y * ( threehalfs - ( x2 * y * y ) );   // 2nd iteration, this can be removed
+            
             return y;
         }
 
@@ -132,7 +132,73 @@ namespace SynopsisThatWontContainDogsForSure
 
         private void FourthTabBtn_Checked(object sender, RoutedEventArgs e)
         {
+            HeaderTextBlock.Text = "Totally not copied for mic.docs";
+            DescriptionTextBlock.Text = @"var startTime = DateTime.Now;
+            ConcurrentBag<OutputModel> outputModels = new ConcurrentBag<OutputModel>();
+            // Source must be array or IList.
+            var source = Enumerable.Range(0, arraySize).ToArray();
 
+            // Partition the entire source array.
+            var rangePartitioner = Partitioner.Create(0, source.Length);
+
+
+            // Loop over the partitions in parallel.
+            Parallel.ForEach(rangePartitioner, (range, loopState) =>
+            {
+                // Loop over each range element without a delegate invocation.
+                for (int i = range.Item1; i < range.Item2; i++)
+                {
+                    OutputModel outputModel = new OutputModel
+                    {
+                        Id = i,
+                        Value = Q_rsqrt(source[i]),
+                        ThreadName = Thread.CurrentThread.Name,
+                        TaskName = Task.CurrentId.ToString(),
+                        Time = DateTime.Now
+                    };
+                    outputModels.Add(outputModel);
+                }
+            });
+            var endTime = startTime - DateTime.Now;
+            EndTimeTextBox.Text = endTime.ToString();";
+        }
+        private void FifthTabBtn_Checked(object sender, RoutedEventArgs e)
+        {
+            HeaderTextBlock.Text = "Options to limit tasks";
+            DescriptionTextBlock.Text = @"var startTime = DateTime.Now;
+            ConcurrentBag<OutputModel> outputModels = new ConcurrentBag<OutputModel>();
+            // Source must be array or IList.
+            var source = Enumerable.Range(0, arraySize).ToArray();
+
+            // Partition the entire source array.
+            var rangePartitioner = Partitioner.Create(0, source.Length);
+
+
+            // Loop over the partitions in parallel.
+            Parallel.ForEach(rangePartitioner, new ParallelOptions { MaxDegreeOfParallelism = 2 }, (range, loopState) =>
+            {
+                // Loop over each range element without a delegate invocation.
+                for (int i = range.Item1; i < range.Item2; i++)
+                {
+                    OutputModel outputModel = new OutputModel
+                    {
+                        Id = i,
+                        Value = Q_rsqrt(source[i]),
+                        ThreadName = Thread.CurrentThread.Name,
+                        TaskName = Task.CurrentId.ToString(),
+                        Time = DateTime.Now
+                    };
+                    outputModels.Add(outputModel);
+                }
+            });
+            var endTime = startTime - DateTime.Now;
+            EndTimeTextBox.Text = endTime.ToString();";
+        }
+
+        private void SixthTabBtn_Checked(object sender, RoutedEventArgs e)
+        {
+            HeaderTextBlock.Text = "Are you in a simulation inside of simulation that's inside of another simaltion?";
+            DescriptionTextBlock.Text = @"Open code for this one";
         }
 
         private void SequentialFor(int numberOfItterations)
@@ -155,7 +221,7 @@ namespace SynopsisThatWontContainDogsForSure
             TimeSpan endTime = startTime - DateTime.Now;
             EndTimeTextBox.Text = endTime.ToString();
 
-            OutputList.ItemsSource = outputModels;
+            //     OutputList.ItemsSource = outputModels;
         }
         private void ParallelFor(int numberOfTasks)
         {
@@ -178,7 +244,7 @@ namespace SynopsisThatWontContainDogsForSure
             var endTime = startTime - DateTime.Now;
             EndTimeTextBox.Text = endTime.ToString();
 
-            OutputList.ItemsSource = outputModels;
+            // OutputList.ItemsSource = outputModels;
         }
         private void ParralelForPartitioned(int iterations)
         {
@@ -186,10 +252,10 @@ namespace SynopsisThatWontContainDogsForSure
             var startTime = DateTime.Now;
             StartTimeTextBox.Text = startTime.ToLongTimeString();
 
-            Parallel.ForEach(Partitioner.Create(0, iterations), (range)  =>
+            Parallel.ForEach(Partitioner.Create(0, iterations), (range) =>
             {
-            for(int i = range.Item1; i < range.Item2; i++)
-{
+                for (int i = range.Item1; i < range.Item2; i++)
+                {
                     OutputModel outputModel = new OutputModel
                     {
                         Id = i,
@@ -204,18 +270,19 @@ namespace SynopsisThatWontContainDogsForSure
             var endTime = startTime - DateTime.Now;
             EndTimeTextBox.Text = endTime.ToString();
 
-            OutputList.ItemsSource = outputModels;
+            //  OutputList.ItemsSource = outputModels;
         }
 
-        private void ParralelForPartitionedThatWorks()
+        private void ParralelForPartitionedThatWorks(int arraySize)
         {
+            var startTime = DateTime.Now;
+            ConcurrentBag<OutputModel> outputModels = new ConcurrentBag<OutputModel>();
             // Source must be array or IList.
-            var source = Enumerable.Range(0, 100000).ToArray();
+            var source = Enumerable.Range(0, arraySize).ToArray();
 
             // Partition the entire source array.
             var rangePartitioner = Partitioner.Create(0, source.Length);
 
-            double[] results = new double[source.Length];
 
             // Loop over the partitions in parallel.
             Parallel.ForEach(rangePartitioner, (range, loopState) =>
@@ -223,17 +290,170 @@ namespace SynopsisThatWontContainDogsForSure
                 // Loop over each range element without a delegate invocation.
                 for (int i = range.Item1; i < range.Item2; i++)
                 {
-                    results[i] = source[i] * Math.PI;
+                    OutputModel outputModel = new OutputModel
+                    {
+                        Id = i,
+                        Value = Q_rsqrt(source[i]),
+                        ThreadName = Thread.CurrentThread.Name,
+                        TaskName = Task.CurrentId.ToString(),
+                        Time = DateTime.Now
+                    };
+                    outputModels.Add(outputModel);
                 }
             });
+            var endTime = startTime - DateTime.Now;
+            EndTimeTextBox.Text = endTime.ToString();
+
+            //  OutputList.ItemsSource = outputModels;
+
         }
-        private async void OperationBtn_Click(object sender, RoutedEventArgs e)
+
+        private void ParralelForPartitionedWithOptions(int arraySize)
         {
+            var startTime = DateTime.Now;
+            ConcurrentBag<OutputModel> outputModels = new ConcurrentBag<OutputModel>();
+            // Source must be array or IList.
+            var source = Enumerable.Range(0, arraySize).ToArray();
+
+            // Partition the entire source array.
+            var rangePartitioner = Partitioner.Create(0, source.Length);
+
+
+            // Loop over the partitions in parallel.
+            Parallel.ForEach(rangePartitioner, new ParallelOptions { MaxDegreeOfParallelism = 2 }, (range, loopState) =>
+            {
+                // Loop over each range element without a delegate invocation.
+                for (int i = range.Item1; i < range.Item2; i++)
+                {
+                    OutputModel outputModel = new OutputModel
+                    {
+                        Id = i,
+                        Value = Q_rsqrt(source[i]),
+                        ThreadName = Thread.CurrentThread.Name,
+                        TaskName = Task.CurrentId.ToString(),
+                        Time = DateTime.Now
+                    };
+                    outputModels.Add(outputModel);
+
+
+                }
+            });
+            var endTime = startTime - DateTime.Now;
+            EndTimeTextBox.Text = endTime.ToString();
+            // OutputList.ItemsSource = outputModels;
+
+        }
+
+        private void OperationBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OutputList.ItemsSource = null;
             int entryNumber = 10000000;
             if (FirstTabBtn.IsChecked == true) SequentialFor(entryNumber);
             if (SecondTabBtn.IsChecked == true) ParallelFor(entryNumber);
             if (ThirdTabBtn.IsChecked == true) ParralelForPartitioned(entryNumber);
-            
+            if (FourthTabBtn.IsChecked == true) ParralelForPartitionedThatWorks(entryNumber);
+            if (FifthTabBtn.IsChecked == true) ParralelForPartitionedWithOptions(entryNumber);
+            if (SixthTabBtn.IsChecked == true) Simulate(10);
+
+
         }
+        private async void OperationAsyncBtn_Click(object sender, RoutedEventArgs e)
+        {
+            int entryNumber = 100000;
+            if (FirstTabBtn.IsChecked == true) await Task.Factory.StartNew(() => SequentialFor(entryNumber));
+            if (SecondTabBtn.IsChecked == true) await Task.Factory.StartNew(() => ParallelFor(entryNumber));
+            if (ThirdTabBtn.IsChecked == true) await Task.Factory.StartNew(() => ParralelForPartitioned(entryNumber));
+            if (FourthTabBtn.IsChecked == true) await Task.Factory.StartNew(() => ParralelForPartitionedThatWorks(entryNumber));
+        }
+
+        private void Simulate(int numberOfSimulations)
+        {
+            int entryNumber = 10000000;
+            List<string> SimulationOutcomes = new List<string>(); ;
+
+            List<TimeSpan> simulationTimes = new List<TimeSpan>(); ;
+            for (int i = 0; i < numberOfSimulations; i++)
+            {
+                var SimulationStart = DateTime.Now;
+                SequentialFor(entryNumber);
+                var simulationTime = DateTime.Now - SimulationStart;
+                simulationTimes.Add(simulationTime);
+            }
+            double TotalSimulationDuration = 0;
+            foreach (var item in simulationTimes)
+            {
+                TotalSimulationDuration = TotalSimulationDuration + item.TotalSeconds;
+            }
+            SimulationOutcomes.Add("First simulation took:" + TotalSimulationDuration + " Which concludes in avarage time of: " + TotalSimulationDuration / numberOfSimulations);
+
+
+
+            simulationTimes = new List<TimeSpan>(); ;
+            for (int i = 0; i < numberOfSimulations; i++)
+            {
+                var SimulationStart = DateTime.Now;
+                ParallelFor(entryNumber);
+                var simulationTime = DateTime.Now - SimulationStart;
+                simulationTimes.Add(simulationTime);
+            }
+             TotalSimulationDuration = 0;
+            foreach (var item in simulationTimes)
+            {
+                TotalSimulationDuration = TotalSimulationDuration + item.TotalSeconds;
+            }
+            SimulationOutcomes.Add("Second simulation took:" + TotalSimulationDuration + " Which concludes in avarage time of: " + TotalSimulationDuration / numberOfSimulations);
+
+
+            simulationTimes = new List<TimeSpan>(); ;
+            for (int i = 0; i < numberOfSimulations; i++)
+            {
+                var SimulationStart = DateTime.Now;
+                ParralelForPartitioned(entryNumber);
+                var simulationTime = DateTime.Now - SimulationStart;
+                simulationTimes.Add(simulationTime);
+            }
+            TotalSimulationDuration = 0;
+            foreach (var item in simulationTimes)
+            {
+                TotalSimulationDuration = TotalSimulationDuration + item.TotalSeconds;
+            }
+            SimulationOutcomes.Add("Third simulation took:" + TotalSimulationDuration + " Which concludes in avarage time of: " + TotalSimulationDuration / numberOfSimulations);
+
+
+            simulationTimes = new List<TimeSpan>(); ;
+            for (int i = 0; i < numberOfSimulations; i++)
+            {
+                var SimulationStart = DateTime.Now;
+                ParralelForPartitionedThatWorks(entryNumber);
+                var simulationTime = DateTime.Now - SimulationStart;
+                simulationTimes.Add(simulationTime);
+            }
+            TotalSimulationDuration = 0;
+            foreach (var item in simulationTimes)
+            {
+                TotalSimulationDuration = TotalSimulationDuration + item.TotalSeconds;
+            }
+            SimulationOutcomes.Add("Fourth simulation took:" + TotalSimulationDuration + " Which concludes in avarage time of: " + TotalSimulationDuration / numberOfSimulations);
+
+
+            simulationTimes = new List<TimeSpan>(); ;
+            for (int i = 0; i < numberOfSimulations; i++)
+            {
+                var SimulationStart = DateTime.Now;
+                ParralelForPartitionedWithOptions(entryNumber);
+                var simulationTime = DateTime.Now - SimulationStart;
+                simulationTimes.Add(simulationTime);
+            }
+            TotalSimulationDuration = 0;
+            foreach (var item in simulationTimes)
+            {
+                TotalSimulationDuration = TotalSimulationDuration + item.TotalSeconds;
+            }
+            SimulationOutcomes.Add("Fifth simulation took:" + TotalSimulationDuration + " Which concludes in avarage time of: " + (TotalSimulationDuration / numberOfSimulations));
+
+            OutputList.ItemsSource = SimulationOutcomes;
+
+        }
+
     }
 }
